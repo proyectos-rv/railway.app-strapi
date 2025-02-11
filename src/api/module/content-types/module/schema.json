@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "curses",
+  "collectionName": "modules",
   "info": {
-    "singularName": "curse",
-    "pluralName": "curses",
-    "displayName": "Cursos"
+    "singularName": "module",
+    "pluralName": "modules",
+    "displayName": "Módulos"
   },
   "options": {
     "draftAndPublish": true
@@ -18,7 +18,7 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::progress.progress",
-      "inversedBy": "cursos"
+      "inversedBy": "modulo"
     }
   }
 }
