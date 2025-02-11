@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "curses",
+  "info": {
+    "singularName": "curse",
+    "pluralName": "curses",
+    "displayName": "Cursos"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Titulo": {
+      "type": "string"
+    }
+  }
+}

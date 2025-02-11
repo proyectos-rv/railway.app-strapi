@@ -2,6 +2,28 @@
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 
+### `Run in local`
+
+Run Strapi in local for first time
+
+1-. Install postgresql 
+
+````
+brew install postgresql@14
+````
+
+2-. Up Database
+
+````
+brew services start postgresql@14
+````
+
+3-. Check if database is online
+
+````
+pg_isready
+````
+
 ### `develop`
 
 Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
