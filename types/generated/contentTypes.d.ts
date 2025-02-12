@@ -502,13 +502,23 @@ export interface ApiCurseCurse extends Struct.CollectionTypeSchema {
     singularName: 'curse';
     pluralName: 'curses';
     displayName: 'Cursos';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Titulo: Schema.Attribute.String;
+    Titulo: Schema.Attribute.String & Schema.Attribute.Required;
     progreso: Schema.Attribute.Relation<'manyToOne', 'api::progress.progress'>;
+    descripcion: Schema.Attribute.Text;
+    slug: Schema.Attribute.UID;
+    categoria: Schema.Attribute.String & Schema.Attribute.Required;
+    Imagen: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    admin_user: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    modulos: Schema.Attribute.Relation<'oneToMany', 'api::module.module'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -553,6 +563,7 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
     singularName: 'module';
     pluralName: 'modules';
     displayName: 'M\u00F3dulos';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -560,6 +571,13 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
   attributes: {
     Titulo: Schema.Attribute.String;
     progreso: Schema.Attribute.Relation<'manyToOne', 'api::progress.progress'>;
+    curso: Schema.Attribute.Relation<'manyToOne', 'api::curse.curse'>;
+    submodulos: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::submodule.submodule'
+    >;
+    descripcion: Schema.Attribute.Text & Schema.Attribute.Required;
+    materiales: Schema.Attribute.Component<'cursos.materiales', true>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -592,11 +610,11 @@ export interface ApiProgressProgress extends Struct.CollectionTypeSchema {
       'plugin::users-permissions.user'
     >;
     submodulo: Schema.Attribute.Relation<
-      'manyToOne',
+      'oneToMany',
       'api::submodule.submodule'
     >;
-    modulo: Schema.Attribute.Relation<'manyToOne', 'api::module.module'>;
-    cursos: Schema.Attribute.Relation<'manyToOne', 'api::curse.curse'>;
+    modulo: Schema.Attribute.Relation<'oneToMany', 'api::module.module'>;
+    cursos: Schema.Attribute.Relation<'oneToMany', 'api::curse.curse'>;
     estado: Schema.Attribute.Enumeration<
       ['No Completado', 'En Progreso', 'Completado']
     > &
@@ -626,6 +644,7 @@ export interface ApiSubmoduleSubmodule extends Struct.CollectionTypeSchema {
     singularName: 'submodule';
     pluralName: 'submodules';
     displayName: 'Submodulos';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -633,6 +652,9 @@ export interface ApiSubmoduleSubmodule extends Struct.CollectionTypeSchema {
   attributes: {
     Titulo: Schema.Attribute.String;
     progreso: Schema.Attribute.Relation<'manyToOne', 'api::progress.progress'>;
+    modulo: Schema.Attribute.Relation<'manyToOne', 'api::module.module'>;
+    descripcion: Schema.Attribute.Text;
+    content: Schema.Attribute.Blocks & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

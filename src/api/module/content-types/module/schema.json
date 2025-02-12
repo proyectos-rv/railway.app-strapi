@@ -4,7 +4,8 @@
   "info": {
     "singularName": "module",
     "pluralName": "modules",
-    "displayName": "Módulos"
+    "displayName": "Módulos",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,28 @@
       "relation": "manyToOne",
       "target": "api::progress.progress",
       "inversedBy": "modulo"
+    },
+    "curso": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::curse.curse",
+      "inversedBy": "modulos"
+    },
+    "submodulos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::submodule.submodule",
+      "mappedBy": "modulo"
+    },
+    "descripcion": {
+      "type": "text",
+      "required": true
+    },
+    "materiales": {
+      "displayName": "materiales",
+      "type": "component",
+      "repeatable": true,
+      "component": "cursos.materiales"
     }
   }
 }

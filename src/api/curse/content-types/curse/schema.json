@@ -4,7 +4,8 @@
   "info": {
     "singularName": "curse",
     "pluralName": "curses",
-    "displayName": "Cursos"
+    "displayName": "Cursos",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,13 +13,46 @@
   "pluginOptions": {},
   "attributes": {
     "Titulo": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "progreso": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::progress.progress",
       "inversedBy": "cursos"
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "slug": {
+      "type": "uid"
+    },
+    "categoria": {
+      "type": "string",
+      "required": true
+    },
+    "Imagen": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "admin_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
+    },
+    "modulos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::module.module",
+      "mappedBy": "curso"
     }
   }
 }

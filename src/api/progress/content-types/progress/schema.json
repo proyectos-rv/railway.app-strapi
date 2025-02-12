@@ -19,21 +19,21 @@
     },
     "submodulo": {
       "type": "relation",
-      "relation": "manyToOne",  
+      "relation": "oneToMany",
       "target": "api::submodule.submodule",
-      "via": "progresos" 
+      "mappedBy": "progreso"
     },
     "modulo": {
       "type": "relation",
-      "relation": "manyToOne",  
+      "relation": "oneToMany",
       "target": "api::module.module",
-      "via": "progresos"  
+      "mappedBy": "progreso"
     },
     "cursos": {
       "type": "relation",
-      "relation": "manyToOne",  
+      "relation": "oneToMany",
       "target": "api::curse.curse",
-      "via": "progresos"  
+      "mappedBy": "progreso"
     },
     "estado": {
       "type": "enumeration",
@@ -42,11 +42,11 @@
         "En Progreso",
         "Completado"
       ],
-      "default": "No Completado"  
+      "default": "No Completado"
     },
     "porcentaje": {
-      "type": "float",  
-      "default": 0  
+      "type": "float",
+      "default": 0
     },
     "fecha_inicio": {
       "type": "datetime"

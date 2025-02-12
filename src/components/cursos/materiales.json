@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_cursos_materiales",
+  "info": {
+    "displayName": "materiales"
+  },
+  "options": {},
+  "attributes": {
+    "Texto_materiales": {
+      "type": "text"
+    },
+    "media_materiales": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    }
+  }
+}

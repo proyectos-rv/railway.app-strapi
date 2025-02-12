@@ -4,7 +4,8 @@
   "info": {
     "singularName": "submodule",
     "pluralName": "submodules",
-    "displayName": "Submodulos"
+    "displayName": "Submodulos",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,19 @@
       "relation": "manyToOne",
       "target": "api::progress.progress",
       "inversedBy": "submodulo"
+    },
+    "modulo": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::module.module",
+      "inversedBy": "submodulos"
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "content": {
+      "type": "blocks",
+      "required": true
     }
   }
 }
