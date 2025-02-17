@@ -450,7 +450,6 @@ export interface PluginUsersPermissionsUser
     displayName: 'User';
   };
   options: {
-    timestamps: true;
     draftAndPublish: false;
   };
   attributes: {
@@ -480,6 +479,8 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     progreso: Schema.Attribute.Relation<'manyToOne', 'api::progress.progress'>;
+    subname: Schema.Attribute.String & Schema.Attribute.Required;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -606,7 +607,7 @@ export interface ApiProgressProgress extends Struct.CollectionTypeSchema {
   };
   attributes: {
     user: Schema.Attribute.Relation<
-      'manyToOne',
+      'oneToMany',
       'plugin::users-permissions.user'
     >;
     submodulo: Schema.Attribute.Relation<
