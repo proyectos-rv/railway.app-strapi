@@ -13,9 +13,9 @@
   "attributes": {
     "user": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "oneToMany",
       "target": "plugin::users-permissions.user",
-      "via": "progresos"
+      "mappedBy": "progreso"
     },
     "submodulo": {
       "type": "relation",
