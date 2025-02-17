@@ -1,0 +1,58 @@
+{
+  "kind": "collectionType",
+  "collectionName": "progresses",
+  "info": {
+    "singularName": "progress",
+    "pluralName": "progresses",
+    "displayName": "Progreso"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "via": "progresos"
+    },
+    "submodulo": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::submodule.submodule",
+      "mappedBy": "progreso"
+    },
+    "modulo": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::module.module",
+      "mappedBy": "progreso"
+    },
+    "cursos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::curse.curse",
+      "mappedBy": "progreso"
+    },
+    "estado": {
+      "type": "enumeration",
+      "enum": [
+        "No Completado",
+        "En Progreso",
+        "Completado"
+      ],
+      "default": "No Completado"
+    },
+    "porcentaje": {
+      "type": "float",
+      "default": 0
+    },
+    "fecha_inicio": {
+      "type": "datetime"
+    },
+    "fecha_fin": {
+      "type": "datetime"
+    }
+  }
+}

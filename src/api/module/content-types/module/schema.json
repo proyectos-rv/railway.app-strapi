@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "modules",
+  "info": {
+    "singularName": "module",
+    "pluralName": "modules",
+    "displayName": "Módulos",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Titulo": {
+      "type": "string"
+    },
+    "progreso": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::progress.progress",
+      "inversedBy": "modulo"
+    },
+    "curso": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::curse.curse",
+      "inversedBy": "modulos"
+    },
+    "submodulos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::submodule.submodule",
+      "mappedBy": "modulo"
+    },
+    "descripcion": {
+      "type": "text",
+      "required": true
+    },
+    "materiales": {
+      "displayName": "materiales",
+      "type": "component",
+      "repeatable": true,
+      "component": "cursos.materiales"
+    }
+  }
+}
