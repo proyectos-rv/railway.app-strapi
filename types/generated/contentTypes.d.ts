@@ -479,8 +479,9 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.role'
     >;
     progreso: Schema.Attribute.Relation<'manyToOne', 'api::progress.progress'>;
-    subname: Schema.Attribute.String & Schema.Attribute.Required;
-    name: Schema.Attribute.String & Schema.Attribute.Required;
+    lastname: Schema.Attribute.String;
+    firstname: Schema.Attribute.String;
+    avatar: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
