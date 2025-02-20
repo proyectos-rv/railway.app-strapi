@@ -20,11 +20,18 @@ export default ({ env }) => ({
               callbackURL:
                 strapi.admin.services.passport.getStrategyCallbackURL("google"),
             },
-            (request, accessToken, refreshToken, profile, done) => {
+            (_request, _accessToken, _refreshToken, profile, done) => {
+              console.log('GOOGLE PROFILE::>>>',profile)
               done(null, {
                 email: profile.email,
                 firstname: profile.given_name,
                 lastname: profile.family_name,
+                avatar: profile.picture,
+                username: profile.email.split('@')[0]
+              }, (err) => {
+                if (err) {
+                  console.error('Error en el callback de autenticación:', err);
+                }
               });
             }
           ),
