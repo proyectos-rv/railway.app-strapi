@@ -71,13 +71,16 @@
       "target": "api::progress.progress",
       "inversedBy": "user"
     },
-    "subname": {
+    "lastname": {
       "type": "string",
-      "required": true
+      "required": false
     },
-    "name": {
+    "firstname": {
       "type": "string",
-      "required": true
+      "required": false
+    },
+    "avatar": {
+      "type": "string"
     }
   }
 }
