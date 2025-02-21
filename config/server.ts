@@ -5,5 +5,11 @@ export default ({ env }) => ({
     keys: env.array('APP_KEYS'),
   },
   url: env('URL'),
-  proxy: true
+  proxy: true,
+  server: {
+    cors: {
+      enabled: true,
+      origin: env('CORS_ORIGIN', 'https://pablovazquezfront-production.up.railway.app'), // Configura el origen CORS
+    },
+  },
 });
