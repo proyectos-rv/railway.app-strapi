@@ -7,7 +7,8 @@ export default ({ env }) => ([
       cookie: {
         secure: process.env.NODE_ENV === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        maxAge: 24 * 60 * 60 * 1000
+        maxAge: 24 * 60 * 60 * 1000,
+        httpOnly: true // Adding httpOnly for better security
       },
     },
   },
@@ -20,7 +21,8 @@ export default ({ env }) => ([
           'connect-src': ["'self'", 'https:', 'http:'],
           'img-src': ["'self'", 'data:', 'blob:', 'https:', 'http:'],
           'media-src': ["'self'", 'data:', 'blob:', 'https:', 'http:'],
-          upgradeInsecureRequests: null,
+          'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+          upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? true : null,
         },
       },
     },
