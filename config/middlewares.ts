@@ -28,20 +28,14 @@ export default ({ env }) => ([
     },
   },
   {
-    name: 'strapi::headers',
+    name: 'strapi::cors',
     config: {
+      enabled: true,
       headers: {
         'Strict-Transport-Security': ['max-age=31536000; includeSubDomains'],
         'X-Content-Type-Options': ['nosniff'],
         'X-Frame-Options': ['DENY'],
-      }
-    }
-  },
-  {
-    name: 'strapi::cors',
-    config: {
-      enabled: true,
-      headers: '*',
+      },
       origin: env.array('CORS_ORIGINS', [
         'https://pablovazquezfront-production.up.railway.app',
         'http://localhost:3000'
