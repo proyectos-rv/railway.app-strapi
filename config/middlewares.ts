@@ -22,7 +22,7 @@ export default ({ env }) => ([
           'img-src': ["'self'", "data:", "blob:", "https:", "http:"],
           'media-src': ["'self'", "data:", "blob:", "https:", "http:"],
           'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-          upgradeInsecureRequests: null
+          upgradeInsecureRequests: process.env.NODE_ENV === 'production'
         },
       },
     },
