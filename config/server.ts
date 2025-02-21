@@ -6,10 +6,19 @@ export default ({ env }) => ({
   },
   url: env('URL'),
   proxy: true,
+  webhooks: {
+    populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
+  },
   server: {
     cors: {
       enabled: true,
-      origin: env('CORS_ORIGIN', 'https://pablovazquezfront-production.up.railway.app'), // Configura el origen CORS
+      origin: env.array('CORS_ORIGINS', [
+        'https://pablovazquezfront-production.up.railway.app',
+        'http://localhost:3000'
+      ]),
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+      headers: ['Content-Type', 'Authorization', 'Origin', 'Accept'],
     },
   },
 });
