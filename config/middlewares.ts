@@ -2,6 +2,16 @@ export default ({ env }) => ([
   'strapi::logger',
   'strapi::errors',
   {
+    name: 'strapi::session',
+    config: {
+      cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 24 * 60 * 60 * 1000
+      },
+    },
+  },
+  {
     name: 'strapi::security',
     config: {
       contentSecurityPolicy: {
@@ -14,6 +24,16 @@ export default ({ env }) => ([
         },
       },
     },
+  },
+  {
+    name: 'strapi::headers',
+    config: {
+      headers: {
+        'Strict-Transport-Security': ['max-age=31536000; includeSubDomains'],
+        'X-Content-Type-Options': ['nosniff'],
+        'X-Frame-Options': ['DENY'],
+      }
+    }
   },
   {
     name: 'strapi::cors',
@@ -30,16 +50,6 @@ export default ({ env }) => ([
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
-  {
-    name: 'strapi::session',
-    config: {
-      cookie: {
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-        maxAge: 24 * 60 * 60 * 1000
-      },
-    },
-  },
   'strapi::favicon',
   'strapi::public',
 ]);
