@@ -18,11 +18,11 @@ export default ({ env }) => ([
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          'connect-src': ["'self'", 'https:', 'http:'],
-          'img-src': ["'self'", 'data:', 'blob:', 'https:', 'http:'],
-          'media-src': ["'self'", 'data:', 'blob:', 'https:', 'http:'],
+          'connect-src': ["'self'", "https:", "http:"],
+          'img-src': ["'self'", "data:", "blob:", "https:", "http:"],
+          'media-src': ["'self'", "data:", "blob:", "https:", "http:"],
           'script-src': ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-          upgradeInsecureRequests: process.env.NODE_ENV === 'production' ? true : null,
+          upgradeInsecureRequests: null
         },
       },
     },
