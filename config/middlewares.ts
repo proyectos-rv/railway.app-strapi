@@ -34,13 +34,10 @@ export default ({ env }) => ([
     name: 'strapi::session',
     config: {
       cookie: {
-        secure: true,
-        httpOnly: true,
-        sameSite: 'none',
-        maxAge: 24 * 60 * 60 * 1000 // 24 horas
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 24 * 60 * 60 * 1000
       },
-      key: 'strapi.sid',
-      proxy: true // Importante cuando estás detrás de un proxy
     },
   },
   'strapi::favicon',
