@@ -4,7 +4,11 @@ export default () => {
       return next();
     }
 
-    ctx.request.secure = true;
+    Object.defineProperty(ctx.request, 'protocol', {
+      value: 'https',
+      configurable: true,
+    });
+
     await next();
   };
 };
