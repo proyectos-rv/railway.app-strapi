@@ -8,7 +8,7 @@ export default ({ env }) => ({
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
-  url: env('URL', '0.0.0.0'),
+  url: env('URL', 'https://railwayapp-strapi-production-4f0e.up.railway.app'),
   cookie: {
     secure: process.env.NODE_ENV === 'production', // Cookies seguras solo en producción
     sameSite: 'lax' // Política de sameSite para seguridad
