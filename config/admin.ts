@@ -22,7 +22,6 @@ export default ({ env }) => ({
               proxy: true,
             },
             (_request, _accessToken, _refreshToken, profile, done) => {
-              console.log('GOOGLE PROFILE::>>>', profile);
               done(null, {
                 email: profile.email,
                 firstname: profile.given_name,
