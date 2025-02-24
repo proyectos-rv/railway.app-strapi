@@ -8,9 +8,20 @@ export default [
     config: {
       contentSecurityPolicy: {
         useDefaults: true,
-        directives: {
-          // ... otras directivas
-        },
+       'connect-src': ["'self'", 'https:'],
+        'img-src': [
+          "'self'",
+          'data:',
+          'blob:',
+          'market-assets.strapi.io',
+        ],
+        'media-src': [
+          "'self'",
+          'data:',
+          'blob:',
+          'market-assets.strapi.io',
+        ],
+        upgradeInsecureRequests: null,
       },
       hsts: {
         maxAge: 31536000,
