@@ -4,13 +4,7 @@ export default () => {
       return next();
     }
 
-    if (ctx.secure) {
-      // La conexión ya es segura, continúa
-      await next();
-    } else {
-      // Redirige a HTTPS
-      ctx.status = 301;
-      ctx.redirect(`https://${ctx.host}${ctx.url}`);
-    }
+    ctx.request.secure = true;
+    await next();
   };
 };
