@@ -8,7 +8,7 @@ export default ({ env }) => ({
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
-  url: env('URL', `https://${env('HOST', '0.0.0.0')}`),
+  url: env('URL', '0.0.0.0'),
   cookie: {
     secure: process.env.NODE_ENV === 'production', // Cookies seguras solo en producción
     sameSite: 'lax' // Política de sameSite para seguridad
