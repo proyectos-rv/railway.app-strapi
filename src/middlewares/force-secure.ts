@@ -3,6 +3,11 @@ export default () => {
     if (ctx.path === '/healthcheck' || ctx.path === '/health') {
       return next();
     }
+
+    if (ctx.path.startsWith('/api/auth/') || ctx.path.startsWith('/api/connect/')) {
+      return next();
+    }
+    
     if (ctx.secure) {
       // La conexión ya es segura, continúa
       await next();
