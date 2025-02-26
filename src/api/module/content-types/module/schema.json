@@ -15,18 +15,6 @@
     "Titulo": {
       "type": "string"
     },
-    "progreso": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::progress.progress",
-      "inversedBy": "modulo"
-    },
-    "curso": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::curse.curse",
-      "inversedBy": "modulos"
-    },
     "submodulos": {
       "type": "relation",
       "relation": "oneToMany",

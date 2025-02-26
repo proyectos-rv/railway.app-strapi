@@ -16,12 +16,6 @@
       "type": "string",
       "required": true
     },
-    "progreso": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::progress.progress",
-      "inversedBy": "cursos"
-    },
     "descripcion": {
       "type": "text"
     },
@@ -51,8 +45,12 @@
     "modulos": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::module.module",
-      "mappedBy": "curso"
+      "target": "api::module.module"
+    },
+    "progreso_modulos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::progress-module.progress-module"
     }
   }
 }

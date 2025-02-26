@@ -65,12 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "progreso": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::progress.progress",
-      "inversedBy": "user"
-    },
     "lastname": {
       "type": "string",
       "required": false

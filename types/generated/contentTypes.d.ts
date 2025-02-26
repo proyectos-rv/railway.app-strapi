@@ -478,7 +478,6 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    progreso: Schema.Attribute.Relation<'manyToOne', 'api::progress.progress'>;
     lastname: Schema.Attribute.String;
     firstname: Schema.Attribute.String;
     avatar: Schema.Attribute.String;
@@ -511,7 +510,6 @@ export interface ApiCurseCurse extends Struct.CollectionTypeSchema {
   };
   attributes: {
     Titulo: Schema.Attribute.String & Schema.Attribute.Required;
-    progreso: Schema.Attribute.Relation<'manyToOne', 'api::progress.progress'>;
     descripcion: Schema.Attribute.Text;
     slug: Schema.Attribute.UID;
     categoria: Schema.Attribute.String & Schema.Attribute.Required;
@@ -521,6 +519,10 @@ export interface ApiCurseCurse extends Struct.CollectionTypeSchema {
     >;
     admin_user: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
     modulos: Schema.Attribute.Relation<'oneToMany', 'api::module.module'>;
+    progreso_modulos: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::progress-module.progress-module'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -572,8 +574,6 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
   };
   attributes: {
     Titulo: Schema.Attribute.String;
-    progreso: Schema.Attribute.Relation<'manyToOne', 'api::progress.progress'>;
-    curso: Schema.Attribute.Relation<'manyToOne', 'api::curse.curse'>;
     submodulos: Schema.Attribute.Relation<
       'oneToMany',
       'api::submodule.submodule'
@@ -596,34 +596,24 @@ export interface ApiModuleModule extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiProgressProgress extends Struct.CollectionTypeSchema {
-  collectionName: 'progresses';
+export interface ApiProgressCourseProgressCourse
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'progress_courses';
   info: {
-    singularName: 'progress';
-    pluralName: 'progresses';
-    displayName: 'Progreso';
+    singularName: 'progress-course';
+    pluralName: 'progress-courses';
+    displayName: 'Progreso Curso';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     user: Schema.Attribute.Relation<
-      'oneToMany',
+      'oneToOne',
       'plugin::users-permissions.user'
     >;
-    submodulo: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::submodule.submodule'
-    >;
-    modulo: Schema.Attribute.Relation<'oneToMany', 'api::module.module'>;
-    cursos: Schema.Attribute.Relation<'oneToMany', 'api::curse.curse'>;
-    estado: Schema.Attribute.Enumeration<
-      ['No Completado', 'En Progreso', 'Completado']
-    > &
-      Schema.Attribute.DefaultTo<'No Completado'>;
-    porcentaje: Schema.Attribute.Float & Schema.Attribute.DefaultTo<0>;
-    fecha_inicio: Schema.Attribute.DateTime;
-    fecha_fin: Schema.Attribute.DateTime;
+    curso: Schema.Attribute.Relation<'oneToOne', 'api::curse.curse'>;
+    progress: Schema.Attribute.Component<'cursos.progress', false>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -634,7 +624,75 @@ export interface ApiProgressProgress extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::progress.progress'
+      'api::progress-course.progress-course'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProgressModuleProgressModule
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'progress_modules';
+  info: {
+    singularName: 'progress-module';
+    pluralName: 'progress-modules';
+    displayName: 'Progreso M\u00F3dulo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    modulo: Schema.Attribute.Relation<'oneToOne', 'api::module.module'>;
+    progress: Schema.Attribute.Component<'cursos.progress', false>;
+    progress_submodules: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::progress-submodule.progress-submodule'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::progress-module.progress-module'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiProgressSubmoduleProgressSubmodule
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'progress_submodules';
+  info: {
+    singularName: 'progress-submodule';
+    pluralName: 'progress-submodules';
+    displayName: 'Progreso Subm\u00F3dulo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    submodulo: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::submodule.submodule'
+    >;
+    progress: Schema.Attribute.Component<'cursos.progress', false>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::progress-submodule.progress-submodule'
     > &
       Schema.Attribute.Private;
   };
@@ -653,7 +711,6 @@ export interface ApiSubmoduleSubmodule extends Struct.CollectionTypeSchema {
   };
   attributes: {
     Titulo: Schema.Attribute.String;
-    progreso: Schema.Attribute.Relation<'manyToOne', 'api::progress.progress'>;
     modulo: Schema.Attribute.Relation<'manyToOne', 'api::module.module'>;
     descripcion: Schema.Attribute.Text;
     content: Schema.Attribute.Blocks & Schema.Attribute.Required;
@@ -1058,7 +1115,9 @@ declare module '@strapi/strapi' {
       'api::curse.curse': ApiCurseCurse;
       'api::exam.exam': ApiExamExam;
       'api::module.module': ApiModuleModule;
-      'api::progress.progress': ApiProgressProgress;
+      'api::progress-course.progress-course': ApiProgressCourseProgressCourse;
+      'api::progress-module.progress-module': ApiProgressModuleProgressModule;
+      'api::progress-submodule.progress-submodule': ApiProgressSubmoduleProgressSubmodule;
       'api::submodule.submodule': ApiSubmoduleSubmodule;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;

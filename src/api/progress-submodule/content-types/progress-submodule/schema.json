@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "progress_submodules",
+  "info": {
+    "singularName": "progress-submodule",
+    "pluralName": "progress-submodules",
+    "displayName": "Progreso Submódulo"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "submodulo": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::submodule.submodule"
+    },
+    "progress": {
+      "type": "component",
+      "repeatable": false,
+      "component": "cursos.progress"
+    }
+  }
+}
