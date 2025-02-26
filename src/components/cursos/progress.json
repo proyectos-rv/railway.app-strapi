@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_cursos_progresses",
+  "info": {
+    "displayName": "progress",
+    "icon": "feather",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "estado": {
+      "type": "enumeration",
+      "enum": [
+        "No Completado",
+        "En progreso",
+        "Completado"
+      ]
+    },
+    "porcentaje": {
+      "type": "integer",
+      "min": 0,
+      "max": 100,
+      "default": 0
+    },
+    "fecha_inicio": {
+      "type": "datetime"
+    },
+    "fecha_fin": {
+      "type": "datetime"
+    }
+  }
+}
