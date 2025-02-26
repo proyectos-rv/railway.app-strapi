@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "progress_modules",
+  "info": {
+    "singularName": "progress-module",
+    "pluralName": "progress-modules",
+    "displayName": "Progreso Módulo",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "modulo": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::module.module"
+    },
+    "progress": {
+      "type": "component",
+      "repeatable": false,
+      "component": "cursos.progress"
+    },
+    "progress_submodules": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::progress-submodule.progress-submodule"
+    }
+  }
+}
